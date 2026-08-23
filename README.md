@@ -96,6 +96,26 @@ Typical event types include:
 
 ---
 
+## 📁 Analysis Results
+
+The full uplift modeling results are available separately because the
+generated CSV file exceeds GitHub's 100 MB file-size limit.
+
+### Final Results
+
+The complete `final_uplift_results.csv` file can be accessed here:
+
+👉 **[Download final uplift results] https://drive.google.com/file/d/1KZf2lCbe_yBf87TZgfFgtrRsvQ_QxCA2/view?usp=drive_link **
+
+The file contains the final decision-level results produced by the
+uplift modeling pipeline, including estimated treatment effects and
+promotion targeting information.
+
+The CSV file is hosted externally and is not stored directly in this
+GitHub repository.
+
+---
+
 # 🔬 Analysis Pipeline
 
 ## Stage 1 — Data Cleaning
@@ -437,6 +457,7 @@ The analysis is expected to produce:
 - Multi-seed validation results
 - Feature importance analysis
 - Promotion targeting policy
+- Final uplift results (`final_uplift_results.csv`)
 
 ---
 
