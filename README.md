@@ -105,7 +105,7 @@ generated CSV file exceeds GitHub's 100 MB file-size limit.
 
 The complete `final_uplift_results.csv` file can be accessed here:
 
-👉 **[Download final uplift results] https://drive.google.com/file/d/1KZf2lCbe_yBf87TZgfFgtrRsvQ_QxCA2/view?usp=drive_link **
+👉 **[Download final uplift results] https://drive.google.com/drive/folders/1hXgfJYUfgQdMQl9XwhMeeGbCvV3zood4?usp=sharing **
 
 The file contains the final decision-level results produced by the
 uplift modeling pipeline, including estimated treatment effects and
