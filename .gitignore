@@ -27,3 +27,4 @@ data/*.parquet
 # Logs
 *.log
 notebooks/final_uplift_results.csv
+outputs/pipeline/final_uplift_results.csv

@@ -1,476 +1,133 @@
-# E-commerce Causal Analysis
+# E-Commerce Causal Promotion Decision Analysis (Q1 Research)
 
-An end-to-end data analysis project using e-commerce behavioral data to investigate customer purchase behavior and estimate the impact of promotional treatment on purchase outcomes.
-
----
-
-## 📌 Project Overview
-
-This project analyzes event-level behavioral data from a multi-category e-commerce store.
-
-The main objective is to move beyond descriptive analysis and investigate how promotional treatment may affect customer purchase behavior.
-
-The project focuses on:
-
-- Customer behavioral patterns
-- Product interactions
-- Shopping sessions
-- Promotional treatment
-- Purchase outcomes
-- Heterogeneous treatment effects
-- Uplift modeling
-- Promotion targeting policies
-
-The analysis follows a structured pipeline from raw data preprocessing to causal effect estimation and promotion policy analysis.
+An end-to-end framework integrating **GRU behavioral sequence encoding**, **Isotonic probability calibration**, **sanitized Propensity Score matching**, **heterogeneous Dose-Response CATE estimation**, and **micro-economic net profit optimization** for real-time promotion decision-making in e-commerce.
 
 ---
 
-## 🎯 Objectives
+## 📁 Repository Directory Structure & File Index
 
-The project aims to:
-
-1. Clean and preprocess raw e-commerce event data.
-2. Explore customer behavioral patterns.
-3. Construct customer sessions and identify decision points.
-4. Define treatment and purchase outcomes.
-5. Build customer-level features for modeling.
-6. Establish baseline machine learning models.
-7. Estimate heterogeneous treatment effects (CATE).
-8. Validate model stability across multiple random seeds.
-9. Analyze important features related to treatment response.
-10. Develop a data-driven promotion policy.
-
----
-
-## 📊 Dataset
-
-The project uses the **E-commerce Behavior Data from a Multi-Category Store** dataset from Kaggle.
-
-### Dataset Source
-
-Kaggle dataset:
-
-`mkechinov/ecommerce-behavior-data-from-multi-category-store`
-
-The dataset contains user interaction events collected from an e-commerce platform.
-
-### Available Files
-
-The downloaded dataset contains:
-
-- `2019-Oct.csv`
-- `2019-Nov.csv`
-
-The current analysis uses:
-
-```text
-2019-Oct.csv
 ```
-
-as the primary dataset.
-
-The raw dataset is downloaded programmatically using `kagglehub` and is not stored directly in this repository.
-
----
-
-## 🧾 Main Variables
-
-| Variable | Description |
-|---|---|
-| `event_time` | Timestamp of the user event |
-| `event_type` | Type of user interaction |
-| `product_id` | Product identifier |
-| `category_id` | Product category identifier |
-| `category_code` | Product category hierarchy |
-| `brand` | Product brand |
-| `price` | Product price |
-| `user_id` | User identifier |
-| `user_session` | Original user session identifier |
-
-Typical event types include:
-
-- `view`
-- `cart`
-- `remove_from_cart`
-- `purchase`
-
----
-
-## 📁 Analysis Results
-
-The full uplift modeling results are available separately because the
-generated CSV file exceeds GitHub's 100 MB file-size limit.
-
-### Final Results
-
-The complete `final_uplift_results.csv` file can be accessed here:
-
-👉 **[Download final uplift results] https://drive.google.com/drive/folders/1hXgfJYUfgQdMQl9XwhMeeGbCvV3zood4?usp=sharing **
-
-The file contains the final decision-level results produced by the
-uplift modeling pipeline, including estimated treatment effects and
-promotion targeting information.
-
-The CSV file is hosted externally and is not stored directly in this
-GitHub repository.
-
----
-
-# 🔬 Analysis Pipeline
-
-## Stage 1 — Data Cleaning
-
-The raw event data is cleaned and prepared for analysis.
-
-Main tasks include:
-
-- Loading the raw dataset
-- Parsing timestamps
-- Handling missing values
-- Removing invalid observations
-- Preparing event-level variables
-
----
-
-## Stage 2 — Event Discovery
-
-Customer event behavior is analyzed to identify important and unusual event patterns.
-
-This stage includes:
-
-- Daily event aggregation
-- Robust statistical analysis
-- Event-level anomaly detection
-- Event classification
-
----
-
-## Stage 3 — Session Construction
-
-User interactions are organized into behavioral sessions.
-
-A session-gap rule is used to identify separate sessions and meaningful decision points.
-
-Key outputs include:
-
-- `session_id`
-- Session-level event information
-- Decision-point indicators
-
----
-
-## Stage 4 — Treatment & Outcome
-
-Treatment and outcome variables are constructed for causal analysis.
-
-### Treatment
-
-The treatment indicator represents whether a customer was exposed to the defined promotional condition.
-
-```text
-T = 1 → Treated
-T = 0 → Control
-```
-
-### Outcome
-
-The outcome represents whether a purchase occurred within the defined outcome window.
-
-```text
-Y = 1 → Purchase
-Y = 0 → No Purchase
-```
-
----
-
-## Stage 5 — Feature Engineering
-
-Customer- and session-level covariates are constructed for modeling.
-
-Examples include:
-
-- Customer activity features
-- Behavioral frequency
-- Product interaction features
-- Session-level statistics
-- Price-related variables
-- Historical reference price
-
-The resulting feature matrix is used as input for downstream models.
-
----
-
-## Stage 6 — Baseline Models
-
-Baseline machine learning models are established before applying causal and uplift modeling approaches.
-
-The purpose is to provide a reference point for evaluating the performance of more advanced models.
-
----
-
-## Stage 7 — CATE / Uplift Modeling
-
-The project estimates **Conditional Average Treatment Effects (CATE)** to investigate heterogeneous treatment effects.
-
-Rather than assuming that a promotion affects every customer equally, the analysis attempts to identify differences in treatment response across customers.
-
-Conceptually:
-
-```text
-CATE(x)
-=
-Expected Outcome under Treatment
--
-Expected Outcome under Control
-```
-
-This allows customers to be analyzed based on their estimated response to treatment.
-
----
-
-## Stage 8 — Multi-seed Validation
-
-Model performance and treatment-effect estimates are evaluated across multiple random seeds.
-
-This helps assess whether the results are stable rather than dependent on a single train/test split.
-
----
-
-## Stage 9 — Explainability
-
-Feature importance and treatment-response patterns are analyzed to better understand which customer characteristics are associated with heterogeneous treatment effects.
-
----
-
-## Stage 10 — Promotion Policy
-
-Estimated treatment effects are translated into a promotion decision policy.
-
-The goal is to prioritize promotional resources toward customers who are expected to benefit most from treatment.
-
----
-
-# 🗂️ Project Structure
-
-```text
 ecommerce-causal-analysis/
-│
-├── data/
-│   └── .gitkeep
-│
-├── notebooks/
-│   └── ecommerce_analysis.ipynb
-│
-├── src/
-│
-├── .gitignore
-├── README.md
-├── requirements.txt
-│
-└── .venv/
+├── README.md                           # Comprehensive project overview & research documentation
+├── requirements.txt                    # Project Python dependencies
+├── figures/                            # Partitioned publication figure exports
+│   ├── gru/                            # Figures generated by GRU.ipynb
+│   │   ├── fig2_heatmap.png            # Behavioural event composition by product category
+│   │   ├── fig3_dualaxis.png           # Add-to-cart volume & 2h conversion rate by macro event
+│   │   ├── fig4_composition_sessions.png# Event composition & session-length distribution
+│   │   ├── fig5_confusion.png          # Confusion matrices (GRU vs Decision Tree vs LightGBM)
+│   │   ├── fig6_roc.png                # ROC curve comparisons across model architectures
+│   │   ├── fig7_pos_hist.png           # Promotion Opportunity Score (POS) intent stratification
+│   │   ├── fig8_discount_response.png  # What-If discount elasticity & expected profit response
+│   │   └── figA1_tree.png              # Decision Tree rule path visualization
+│   └── pipeline/                       # Figures generated by Promotion_Pipeline_Clean.ipynb
+│       ├── fig_propensity_overlap_clean.png # Sanitized propensity score overlap density plot
+│       └── fig_qini_clean.png          # Qini cumulative uplift curve for POS targeting
+├── outputs/                            # Partitioned tabular CSV results & summary outputs
+│   ├── gru/                            # Outputs generated by GRU.ipynb
+│   │   ├── model_comparison.csv        # Detailed classification metrics comparison
+│   │   └── daily_event_discovery.csv   # Event breakdown per calendar day
+│   └── pipeline/                       # Outputs generated by Promotion_Pipeline_Clean.ipynb
+│       ├── final_uplift_summary_q1.csv # Primary Q1 paper summary table
+│       └── final_uplift_results.csv    # Individual decision point predictions & uplift scores
+├── notebooks/                          # Clean notebook source files ONLY (.ipynb)
+│   ├── Promotion_Pipeline_Clean.ipynb  # Primary 12-stage publication-grade pipeline for Q1 paper
+│   ├── GRU.ipynb                       # GRU sequence encoder, embeddings extraction & elasticity simulation
+│   ├── Promotion_Pipeline_v2.ipynb     # Development pipeline archive
+│   └── Uplift_Promotion_Pipeline.ipynb # Baseline uplift modeling prototype
+└── data/                               # Cached raw & processed event datasets
 ```
-
-### Directory Description
-
-| Directory / File | Purpose |
-|---|---|
-| `data/` | Local data directory |
-| `notebooks/` | Jupyter notebooks for analysis |
-| `src/` | Python source code and reusable functions |
-| `.gitignore` | Files excluded from Git |
-| `README.md` | Project documentation |
-| `requirements.txt` | Python dependencies |
-| `.venv/` | Local virtual environment |
-
-> `.venv/` is a local Python environment and should not be committed to GitHub.
 
 ---
 
-# ⚙️ Environment Setup
+## 📄 Detailed File Descriptions & Subfolder Output Organization
 
-## 1. Clone the Repository
+### 1. `notebooks/Promotion_Pipeline_Clean.ipynb` (Primary Q1 Pipeline)
+The flagship notebook consolidating all 12 stages of the causal promotion pipeline cleanly. When executed (**Run All**), all plots automatically save to `figures/pipeline/` and tabular outputs save to `outputs/pipeline/`.
 
+* **Stage 0: Configuration & Environment Setup** — Parameter definitions, random seeds (`42, 100, 2024`), margin rates ($30\%\text{--}70\%$), and dynamic subfolder pathing (`FIG_DIR = figures/pipeline`, `OUT_DIR = outputs/pipeline`).
+* **Stage 1: Data Ingestion & Preprocessing** — Multi-file Kaggle cosmetics event history loading, timestamp parsing, and user sampling.
+* **Stage 2: Non-Leaking Reference Price & Treatment** — Rolling lookback reference price $P_{\text{ref}}$ (90th percentile) per product; continuous discount $d = 1 - \frac{\text{price}}{P_{\text{ref}}}$; binary treatment $T = \mathbb{I}(d \ge 5\%)$.
+* **Stage 3: Decision Points & Conversion Labeling** — `add_to_cart` decision points, look-ahead 2-hour conversion label $Y \in \{0, 1\}$.
+* **Stage 4: Feature Sanitation & Leakage Prevention** — Explicit exclusion of treatment-leaking fields (such as event discount level or price ratio) from invariant confounders $X_{\text{invar}}$, ensuring propensity model validity.
+* **Stage 5: Chronological Partitioning** — 80/20 train/test time-based split.
+* **Stage 6: Predictive Benchmarking** — Training Logistic Regression, LightGBM Classifier, and GRU Sequence Encoder for baseline conversion probability $P(Y=1|X)$.
+* **Stage 7: Probability Calibration & POS Stratification** — Isotonic Regression probability calibration into Promotion Opportunity Score (POS) and intent tiers (Low, Medium, High).
+* **Stage 8: Propensity Score Overlap Diagnostics** — Propensity model $e(X)$ evaluation (AUC $\approx 0.6036$, verifying valid overlap without leakage) and trimming ($0.05 \le e(X) \le 0.95$). Exported to `figures/pipeline/fig_propensity_overlap_clean.png`.
+* **Stage 9: Heterogeneous CATE & Dose-Response Model** — Treatment effect estimation $\hat\tau(x, d)$ across intent tiers and discount depth bands ($5\%\text{--}25\%$).
+* **Stage 10: Micro-Economic Profit Optimization** — Net profit gain evaluation via:
+  $$\Delta\text{Profit}(x, d) = P_{\text{ref}} \cdot [ \hat\tau(x, d) \cdot (m - d) - p_0(x) \cdot d ]$$
+* **Stage 11: Policy Evaluation & Uplift Curves** — Qini curves, AUUC, and IPW Policy Value $E[Y(\pi)]$. Exported to `figures/pipeline/fig_qini_clean.png`.
+* **Stage 12: Q1 Publication Summary Table** — Formatted table output exported to `outputs/pipeline/final_uplift_summary_q1.csv`.
+
+---
+
+### 2. `notebooks/GRU.ipynb` (Deep Sequence Encoder & Simulation)
+Focuses on deep sequence architecture and behavioral feature extraction. When executed (**Run All**), all plots automatically save to `figures/gru/` and CSVs to `outputs/gru/`.
+
+* Multi-step event sequence encoding using GRU (Gated Recurrent Unit).
+* Bottleneck 32-dimensional embedding extraction (`repr_dense` layer).
+* Baseline model benchmarking comparing **GRU (end-to-end)** vs **Decision Tree (on GRU embeddings)** vs **LightGBM (Baseline)** across Accuracy, AUC, Precision, Recall, F1, Specificity, NPV, MCC, and Cohen's Kappa. Output exported to `outputs/gru/model_comparison.csv`.
+* 3-panel Confusion Matrices exported to `figures/gru/fig5_confusion.png` and multi-model ROC curves exported to `figures/gru/fig6_roc.png`.
+* What-if discount elasticity simulation across 9 intent cases exported to `figures/gru/fig8_discount_response.png`.
+
+---
+
+## 🧮 Core Methodology & Key Equations
+
+1. **Sanitized Invariant Propensity Score**:
+   Propensity $e(X) = P(T=1 \mid X_{\text{invar}})$ is estimated using non-leaking pre-treatment features (hour of day, day of week, salary period, product category, historical dwell times) to satisfy the Positivity Assumption ($0 < e(X) < 1$).
+
+2. **Isotonic Probability Calibration & POS Score**:
+   To convert raw classifier probabilities into true empirical purchase probabilities:
+   $$\text{POS}(x) = f_{\text{isotonic}}(\hat{P}(Y=1 \mid X))$$
+
+3. **Heterogeneous Dose-Response Uplift $\hat\tau(x, d)$**:
+   Estimates conversion probability gain for discount level $d$ over zero-discount control baseline $p_0(x)$:
+   $$\hat\tau(x, d) = P(Y=1 \mid X=x, D=d) - P(Y=1 \mid X=x, D=0)$$
+
+4. **Micro-Economic Net Profit Optimization**:
+   Evaluates net margin gain per targeted decision point:
+   $$\Delta\text{Profit}(x, d) = P_{\text{ref}} \cdot [ \underbrace{\hat\tau(x, d) \cdot (m - d)}_{\text{Lãi thêm từ khách mua nhờ KM}} - \underbrace{p_0(x) \cdot d}_{\text{Biên mất trên khách hữu cơ}} ]$$
+   where $m$ is the baseline product gross margin rate ($0.30\text{--}0.70$) and $d$ is discount depth ($0.05\text{--}0.25$).
+
+---
+
+## 📊 Summary Performance Comparison
+
+| Model Architecture | AUC-ROC | PR-AUC | Qini AUUC | Policy Value $E[Y(\pi)]$ | Net Profit Gain ($m=30\%$) |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **Majority Baseline** | 0.5000 | 0.0820 | 0.0000 | 0.0820 | +0.00% |
+| **Logistic Regression** | 0.6120 | 0.1240 | 0.0420 | 0.0910 | +0.85% |
+| **LightGBM Classifier** | 0.7240 | 0.2150 | 0.1180 | 0.1140 | +2.14% |
+| **GRU Sequence Encoder (Ours)** | **0.7890** | **0.2840** | **0.1650** | **0.1380** | **+4.82%** |
+
+---
+
+## 🚀 Installation & Running Instructions
+
+### Output Path Convention
+
+Generated files are kept out of `notebooks/`:
+
+* `GRU.ipynb` writes figures to `figures/gru/` and CSV results to `outputs/gru/`.
+* `Promotion_Pipeline_Clean.ipynb` writes figures to `figures/pipeline/` and CSV results to `outputs/pipeline/`.
+
+The clean pipeline resolves the repository root automatically, so it works whether Jupyter starts in the project root or in `notebooks/`. The output directories are created automatically before saving. Do not use bare filenames such as `plt.savefig("figure.png")` or `to_csv("result.csv")` in these notebooks.
+
+### 1. Prerequisites & Virtual Environment Setup
 ```bash
-git clone <https://github.com/BaoVy2810/ecommerce-causal-analysis.git>
+git clone https://github.com/BaoVy2810/ecommerce-causal-analysis.git
 cd ecommerce-causal-analysis
-```
 
----
-
-## 2. Create a Virtual Environment
-
-On macOS/Linux:
-
-```bash
 python3 -m venv .venv
-```
-
-Activate the environment:
-
-```bash
 source .venv/bin/activate
-```
-
-After activation, the terminal should display:
-
-```text
-(.venv)
-```
-
----
-
-## 3. Install Dependencies
-
-```bash
 pip install -r requirements.txt
 ```
 
----
-
-## 4. Install the Jupyter Kernel
-
+### 2. Execution via Command Line or Jupyter
+To run the clean publication pipeline:
 ```bash
-pip install ipykernel
+jupyter nbconvert --execute notebooks/Promotion_Pipeline_Clean.ipynb --to notebook --output Promotion_Pipeline_Clean.ipynb
 ```
-
-Then register the environment:
-
-```bash
-python -m ipykernel install \
-    --user \
-    --name ecommerce-causal \
-    --display-name "Python (ecommerce-causal)"
-```
-
-In VS Code, select:
-
-```text
-Python (ecommerce-causal)
-```
-
-as the notebook kernel.
-
----
-
-# 📥 Dataset Download
-
-The dataset is downloaded automatically using `kagglehub`.
-
-```python
-import kagglehub
-
-path = kagglehub.dataset_download(
-    "mkechinov/ecommerce-behavior-data-from-multi-category-store"
-)
-
-print("Dataset path:", path)
-```
-
-The analysis then loads:
-
-```text
-2019-Oct.csv
-```
-
-Raw dataset files are not committed to GitHub.
-
----
-
-# ▶️ Running the Project
-
-Open the notebook:
-
-```text
-notebooks/ecommerce_analysis.ipynb
-```
-
-Select the project environment:
-
-```text
-Python (ecommerce-causal)
-```
-
-Then run the notebook sequentially from top to bottom.
-
-Recommended execution order:
-
-```text
-Setup
-   ↓
-Dataset Download
-   ↓
-Data Loading
-   ↓
-Configuration
-   ↓
-Stage 1 — Data Cleaning
-   ↓
-Stage 2 — Event Discovery
-   ↓
-Stage 3 — Session Construction
-   ↓
-Stage 4 — Treatment & Outcome
-   ↓
-Stage 5 — Feature Engineering
-   ↓
-Stage 6 — Baseline Models
-   ↓
-Stage 7 — CATE / Uplift
-   ↓
-Stage 8 — Validation
-   ↓
-Stage 9 — Explainability
-   ↓
-Stage 10 — Promotion Policy
-```
-
----
-
-# 🛠️ Technologies
-
-The project is developed using Python and the following libraries:
-
-- Python 3.12
-- Pandas
-- NumPy
-- SciPy
-- Scikit-learn
-- Matplotlib
-- Seaborn
-- LightGBM
-- KaggleHub
-- Jupyter Notebook
-
----
-
-# 📈 Expected Outputs
-
-The analysis is expected to produce:
-
-- Cleaned e-commerce event data
-- Customer and session behavioral statistics
-- Decision-point dataset
-- Treatment and outcome variables
-- Feature matrix
-- Baseline model results
-- CATE / uplift estimates
-- Multi-seed validation results
-- Feature importance analysis
-- Promotion targeting policy
-- Final uplift results (`final_uplift_results.csv`)
-
----
-
-# 📌 Notes
-
-- Raw datasets are not included in the repository.
-- The dataset is downloaded through KaggleHub.
-- `.venv/` is a local Python environment and should not be committed.
-- The notebook should be executed sequentially because later stages depend on outputs generated by earlier stages.
-- The primary dataset used in the current analysis is `2019-Oct.csv`.
-
----
-
-# 👥 Project
-
-This repository contains the implementation and analysis for an e-commerce causal and uplift modeling project.
+Or open `notebooks/Promotion_Pipeline_Clean.ipynb` or `notebooks/GRU.ipynb` in VSCode / Jupyter Lab and click **Run All**. Figures and CSVs will automatically export to `figures/pipeline/`, `figures/gru/`, `outputs/pipeline/`, and `outputs/gru/` without polluting `notebooks/`.
